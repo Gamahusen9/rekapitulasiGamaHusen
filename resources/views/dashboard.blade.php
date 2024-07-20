@@ -129,32 +129,28 @@
                 <div class="col">
                     <div class="card border-0 shadow p-3 mb-5 bg-body-tertiary rounded">
                         @foreach ($rayons as $key)
-                            <p>Jumlah Peserta Didik {{ $key['rayons'] }}:</p>
-                            <div class="student"
-                                style="
+                            @if ($key['user_id'] == Auth::id())
+                                <p>Jumlah Peserta Didik {{ $key['rayons'] }}:</p>
+                                <div class="student"
+                                    style="
                         display:flex;
                         margin-left:-30px;
                         justify-content:space-evenly;
                         width:150px;
                         ">
 
-                                <i style="font-size: 50px" class="bi bi-person"></i>
-                                @php
-                                    $count = 0;
-                                @endphp
-                                @if ($key['user_id'] == Auth::id())
+                                    <i style="font-size: 50px" class="bi bi-person"></i>
+                                    @php
+                                        $count = 0;
+                                    @endphp
                                     @foreach ($students as $std)
                                         @if ($std['rayon_id'] == $key['id'])
                                             @php
                                                 $count++;
                                             @endphp
-                                        @else
-                                            @php
-                                                $count = 0;
-                                            @endphp
                                         @endif
                                     @endforeach
-                                @endif
+                            @endif
                         @endforeach
                         <h3 style="margin-top: 20px">{{ $count }}</h3>
                         </>
